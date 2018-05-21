@@ -5,7 +5,7 @@ import datetime
 
 class MongoDB(object):
     def __init__(self):
-        client = MongoClient('13.228.230.53', port=7101,
+        client = MongoClient('127.0.0.1', port=7101,
                              username='loltest', password='Lol@Test',
                              authSource='loltest', authMechanism='SCRAM-SHA-1')
         db = client.loltest
