@@ -14,58 +14,76 @@ class MongoDB(object):
         self.collection = db.users
 
     def MongoFind_Phone(self,phone):
-        # 查村用戶是否存在
-        result = self.collection.find_one({'mobile': phone})
-        # token_str = result.text
-        # token_dict = json.dumps(result['mobile'])
-        if result == None:
-            print("用户不存在")
-        else:
-            print("用户存在:")
-        return True
+        try:
+        # 查詢用戶是否存在
+            result = self.collection.find_one({'mobile': phone})
+            # token_str = result.text
+            # token_dict = json.dumps(result['mobile'])
+            if result == None:
+                return result
+            else:
+                return result
+        except:
+            raise Exception
+
 
     def MongoFind_NickName(self,name):
-        # 查村用戶是否存在
-        result = self.collection.find_one({'nickname': name})
-        # token_str = result.text
-        # token_dict = json.dumps(result['nickname'])
-        if result == None:
-            print("用户不存在")
-        else:
-            print("用户存在")
-        return True
+        try:
+            # 查詢用戶是否存在
+            result = self.collection.find_one({'nickname': name})
+            # token_str = result.text
+            # token_dict = json.dumps(result['nickname'])
+            if result == None:
+                return result
+            else:
+                return result
+        except:
+            raise Exception
 
     def MongoDele_Phone(self,phone):
-        # 對已存在用戶進行刪除
-        self.collection.remove({'mobile': phone})
-        # MongoFind_Phone(phone)
-        result_find = self.collection.find_one({'mobile': phone})
-        # token_dict = json.dumps(result_find['mobile'])
-        if result_find == None:
-            print("用户已刪除")
-        else:
-            print("用戶未刪除")
-        return True
+        try:
+            # 對已存在用戶進行刪除
+            self.collection.remove({'mobile': phone})
+            # MongoFind_Phone(phone)
+            result_find = self.collection.find_one({'mobile': phone})
+            # token_dict = json.dumps(result_find['mobile'])
+            if result_find == None:
+                return result_find
+            else:
+                return result_find
+        except:
+            raise Exception
 
     def MongoDele_Nickname(self,name):
-        # 對已存在用戶進行刪除
-        self.collection.delete_one({'nickname': name})
-        # MongoFind_NickName(name)
-        result_find = self.collection.find_one({'nickname': name})
-        # token_dict = json.dumps(result_find['nickname'])
-        if result_find == None:
-            print("用户已刪除:")
-        else:
-            print("用戶未刪除:")
-        return True
+        try:
+            # 對已存在用戶進行刪除
+            self.collection.delete_one({'nickname': name})
+            # MongoFind_NickName(name)
+            result_find = self.collection.find_one({'nickname': name})
+            # token_dict = json.dumps(result_find['nickname'])
+            if result_find == None:
+                return result_find
+            else:
+                return result_find
+        except:
+            raise Exception
 
     def MongoInsert_User(self,nickname, mobile):
-        result = self.collection.insert_one({"nickname": nickname, "mobile": mobile})
-        result_find = self.collection.find_one({'nickname': nickname})
-        token_dict = json.dumps(result_find['nickname'])
-        if result == None:
-            print("用戶插入失敗")
-        else:
-            print("用戶插入成功")
-        return True
+        try:
+            result = self.collection.insert_one({"nickname": nickname, "mobile": mobile})
+            result_find = self.collection.find_one({'nickname': nickname})
+            token_dict = json.dumps(result_find['nickname'])
+            if result == None:
+                return token_dict
+            else:
+                return token_dict
+        except:
+            raise Exception
 
+if __name__ =="__main__":
+    test = MongoDB()
+    print(test.MongoFind_NickName('erictsang7'))
+    print(test.MongoFind_NickName('66566555555'))
+    print(test.MongoDele_Nickname('test2028'))
+    print(test.MongoDele_Phone('7889565655'))
+    print(test.MongoInsert_User('test2028','7889565655'))
